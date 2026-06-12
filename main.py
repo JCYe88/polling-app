@@ -18,10 +18,6 @@ def test():
 
 @app.post("/polls/create")
 def create_poll(poll: PollCreate):
-    # return Poll(
-    #     title="some placeholder title",
-    #     options=["yes", "no", "maybe"]
-    # )
     new_poll = poll.create_poll()
     return {
         "detail": "Poll successfully created",
