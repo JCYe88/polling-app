@@ -1,9 +1,10 @@
 from fastapi import FastAPI
-from app.models.Polls import Poll, PollCreate
-
-
+from app.api.polls import router
 
 app = FastAPI(title="Polls API")
+
+app.include_router(router, prefix="/polls", tags=["polls"])
+
 
 @app.get("/health")
 def health():
@@ -13,16 +14,3 @@ def health():
 @app.get("/test")
 def test():
     return {"message": "hello there"}
-
-
-
-@app.post("/polls/create")
-def create_poll(poll: PollCreate):
-    new_poll = poll.create_poll()
-    return {
-        "detail": "Poll successfully created",
-        "poll_id": new_poll.id,
-        "poll": new_poll
-    }
-    
-
